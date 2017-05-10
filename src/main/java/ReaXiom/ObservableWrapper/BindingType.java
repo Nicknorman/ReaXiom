@@ -3,7 +3,7 @@ package ReaXiom.ObservableWrapper;
 /**
  * Created by Nick on 10-05-2017.
  */
-public enum BindingTypes {
+public enum BindingType {
     ADD,
     SUBTRACT,
     MULTIPLY,
