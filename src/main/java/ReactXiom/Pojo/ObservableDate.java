@@ -1,8 +1,6 @@
-package ReactXiom.Pojo;
+package ReaXiom.Pojo;
 
-import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.*;
-import javafx.beans.value.ObservableValue;
 
 import java.util.Calendar;
 import java.util.Date;

@@ -1,19 +1,19 @@
-package ReactXiom.ObservableWrapper
+package ReaXiom.ObservableWrapper
 
 /**
  * Created by Nick on 07-05-2017.
  */
 class RIntTester {
     public static void main(String[] args) {
-        def a = new RInt(5);
-        def b = new RInt(2);
-        def c = new RInt();
-        c << a + b;
+        def a = new Rax(5);
+        println a
 
+        def b = new Rax(a);
         println b
 
-        a.set(7);
+        a.setValue(7);
 
+        println a
         println b
     }
 }
