@@ -63,3 +63,4 @@ $RECYCLE.BIN/
 *.lnk
 .idea/workspace.xml
 .idea/uiDesigner.xml
+.idea/kotlinc.xml
