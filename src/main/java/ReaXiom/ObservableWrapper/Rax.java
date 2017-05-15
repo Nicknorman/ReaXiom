@@ -7,8 +7,8 @@ import java.util.Observer;
  * Created by Nick on 06-05-2017.
  */
 public class Rax<T> extends Observable implements Observer {
-    private T _value;
     private Observable _subscribedTo;
+    private T _value;
 
     public Rax(T value) {
         this();
@@ -36,6 +36,10 @@ public class Rax<T> extends Observable implements Observer {
         this._setValueAndNotify(newValue);
     }
 
+    /**
+     * Unsafe if returned value is changed.
+     * @return
+     */
     public T getValue() {
         return _value;
     }
@@ -74,6 +78,8 @@ public class Rax<T> extends Observable implements Observer {
     }
 
     /**
+     * Should only be called by the Observable that this Rax is subscribed to.
+     *
      * Updates this Rax's value and notifies all of its observers if {o} corrensponds to its _subscribedTo Observable,
      * and {arg}'s type is the same type as this Rax's internal _value's type.
      * @param o
@@ -86,13 +92,13 @@ public class Rax<T> extends Observable implements Observer {
                 this._setValueAndNotify((T)arg);
             } else {
                 throw new RuntimeException("Subscribed value type " + arg.getClass().toString() +
-                        " differs from " + _value.getClass().getName());
+                        " differs from " + _value.getClass().toString());
             }
         }
     }
 
     /**
-     * Add observer and update it instantly.
+     * Add observer and update the Observer instantly.
      * @param observer
      */
     @Override
