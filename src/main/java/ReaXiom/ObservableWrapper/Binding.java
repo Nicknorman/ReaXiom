@@ -74,7 +74,7 @@ public abstract class Binding<T, A1, A2> extends Observable implements Observer 
             super.notifyObservers(_value);
             super.clearChanged();
         } else {
-            throw new RuntimeException("Subscribed _value _type " + arg.getClass().toString() +
+            throw new RuntimeException("Subscribed value type " + arg.getClass().toString() +
                 " differs from " + _arg.getClass().toString());
         }
     }
