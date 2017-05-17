@@ -25,7 +25,6 @@ public class NumberBinding extends Binding<Number, Number, Number> {
 
     /**
      * Should calculate and update this Binding's _value from its internal arguments.
-     *
      * @param arg1
      * @param arg2
      */
@@ -44,7 +43,7 @@ public class NumberBinding extends Binding<Number, Number, Number> {
             return divideNumbers(arg1, arg2, _valueType);
         if (_bindingType == NumberBindingType.MULTIPLY)
             return multiplyNumbers(arg1, arg2, _valueType);
-        throw new RuntimeException("Binding type is not a known value");
+        throw new RuntimeException("Number binding type is not a known value: " + _bindingType.toString());
     }
 
     /**
@@ -73,7 +72,7 @@ public class NumberBinding extends Binding<Number, Number, Number> {
             return a.longValue() + b.longValue();
         if (returnType == Integer.class)
             return a.intValue() + b.intValue();
-        throw new RuntimeException("Return type not specified as one of the allowed values");
+        throw new RuntimeException("Return type not specified as one of the allowed values: " + returnType);
     }
 
     private static Number subtractNumbers(Number a, Number b, Class<? extends Number> returnType) {
@@ -85,7 +84,7 @@ public class NumberBinding extends Binding<Number, Number, Number> {
             return a.longValue() - b.longValue();
         if (returnType == Integer.class)
             return a.intValue() - b.intValue();
-        throw new RuntimeException("Return type not specified as one of the allowed values");
+        throw new RuntimeException("Return type not specified as one of the allowed values: " + returnType);
     }
 
     private static Number multiplyNumbers(Number a, Number b, Class<? extends Number> returnType) {
@@ -97,7 +96,7 @@ public class NumberBinding extends Binding<Number, Number, Number> {
             return a.longValue() * b.longValue();
         if (returnType == Integer.class)
             return a.intValue() * b.intValue();
-        throw new RuntimeException("Return type not specified as one of the allowed values");
+        throw new RuntimeException("Return type not specified as one of the allowed values: " + returnType);
     }
 
     private static Number divideNumbers(Number a, Number b, Class<? extends Number> returnType) {
@@ -109,6 +108,6 @@ public class NumberBinding extends Binding<Number, Number, Number> {
             return a.longValue() / b.longValue();
         if (returnType == Integer.class)
             return a.intValue() / b.intValue();
-        throw new RuntimeException("Return type not specified as one of the allowed values");
+        throw new RuntimeException("Return type not specified as one of the allowed values: " + returnType);
     }
 }
