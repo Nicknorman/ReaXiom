@@ -65,3 +65,5 @@ $RECYCLE.BIN/
 .idea/uiDesigner.xml
 .idea/kotlinc.xml
 .idea/misc.xml
+.idea/libraries/Maven__org_jetbrains_annotations_15_0.xml
+.idea/misc.xml
