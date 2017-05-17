@@ -13,18 +13,18 @@ public abstract class Binding<T, A1, A2> extends Observable implements Observer 
     private A1 _arg1;
     private A2 _arg2;
     private T _value;
-    protected BindingType _type;
+    protected BindingType _bindingType;
 
     /**
      *
      * @param obs1
      * @param obs2
-     * @param type The type of Binding that should describe the relationship between the two Observables' values.
+     * @param bindingType The type of Binding that should describe the relationship between the two Observables' values.
      */
-    public Binding(Observable obs1, Observable obs2, BindingType type) {
+    public Binding(Observable obs1, Observable obs2, BindingType bindingType) {
         this._obs1 = obs1;
         this._obs2 = obs2;
-        this._type = type;
+        this._bindingType = bindingType;
     }
 
     /**
@@ -44,7 +44,8 @@ public abstract class Binding<T, A1, A2> extends Observable implements Observer 
     public void update(Observable observable, Object arg) {
         if (observable == _obs1) {
             _calcValueAndNotify(_arg1, arg);
-        } else if (observable == _obs2) {
+        }
+        else if (observable == _obs2) {
             _calcValueAndNotify(_arg2, arg);
         }
     }
@@ -74,7 +75,7 @@ public abstract class Binding<T, A1, A2> extends Observable implements Observer 
             super.notifyObservers(_value);
             super.clearChanged();
         } else {
-            throw new RuntimeException("Subscribed _value _type " + arg.getClass().toString() +
+            throw new RuntimeException("Subscribed _value _bindingType " + arg.getClass().toString() +
                 " differs from " + _arg.getClass().toString());
         }
     }
