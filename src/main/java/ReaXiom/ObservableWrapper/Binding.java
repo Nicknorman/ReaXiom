@@ -7,11 +7,11 @@ import java.util.Observer;
  * Created by Nick on 10-05-2017.
  * Binds 2 Observables
  */
-public abstract class Binding<T, A1, A2> extends Observable implements Observer {
+public abstract class Binding<T> extends ObservableAxiom {
     private Observable _obs1;
     private Observable _obs2;
-    private A1 _arg1;
-    private A2 _arg2;
+    private Object _arg1;
+    private Object _arg2;
     private T _value;
     protected BindingType _bindingType;
 
@@ -22,9 +22,15 @@ public abstract class Binding<T, A1, A2> extends Observable implements Observer 
      * @param bindingType The type of Binding that should describe the relationship between the two Observables' values.
      */
     public Binding(Observable obs1, Observable obs2, BindingType bindingType) {
+        super();
+
         this._obs1 = obs1;
         this._obs2 = obs2;
         this._bindingType = bindingType;
+
+        // Subscribe to both observables
+        _obs1.addObserver(this);
+        _obs2.addObserver(this);
     }
 
     /**
@@ -37,16 +43,31 @@ public abstract class Binding<T, A1, A2> extends Observable implements Observer 
 
     /**
      * Should only be called by one of the two Observables that this Binding is subscribed to.
+     * Updates the value associated with one its two Observables.
      * @param observable
-     * @param arg
+     * @param value
      */
-    @Override
-    public void update(Observable observable, Object arg) {
+    public void update(Observable observable, Object value) {
+        if (value == null)
+            return;
+
         if (observable == _obs1) {
-            _calcValueAndNotify(_arg1, arg);
+            if (_arg1 == null || _arg1.getClass().isInstance(value)) {
+                _arg1 = value;
+                _calcValueAndNotify();
+            } else {
+                throw new RuntimeException("Subscribed value type " + value.getClass().toString() +
+                        " differs from " + _arg1.getClass().toString());
+            }
         }
         else if (observable == _obs2) {
-            _calcValueAndNotify(_arg2, arg);
+            if (_arg2 == null || _arg2.getClass().isInstance(value)) {
+                _arg2 = value;
+                _calcValueAndNotify();
+            } else {
+                throw new RuntimeException("Subscribed value type " + value.getClass().toString() +
+                        " differs from " + _arg2.getClass().toString());
+            }
         }
     }
 
@@ -61,27 +82,34 @@ public abstract class Binding<T, A1, A2> extends Observable implements Observer 
     }
 
     /**
-     * Sets the _value of one of the two internal arguments, calls _calcValue(), and notifies all its observers.
-     * @param _arg the internal argument to set.
-     * @param arg the new _value that the internal _value should contain.
+     * Calls _calcValue() if both internal arguments are not null.
+     * Notifies all its observers of the newly calculated value.
      */
-    private void _calcValueAndNotify(Object _arg, Object arg) {
-        if (_arg == null || _arg.getClass().isInstance(arg)) {
-            _arg = arg;
-            // Update _value calculated from args
-            _value = _calcValue(_arg1, _arg2);
-            // Notify observers with internal calculated value
-            super.setChanged();
-            super.notifyObservers(_value);
-            super.clearChanged();
-        } else {
-            throw new RuntimeException("Subscribed value type " + arg.getClass().toString() +
-                " differs from " + _arg.getClass().toString());
-        }
+    private void _calcValueAndNotify() {
+            if (_arg1 != null && _arg2 != null) {
+                // Update _value calculated from args
+                _value = _calcValue(_arg1, _arg2);
+                // Notify observers with internal calculated value
+                super.setChanged();
+                super.notifyObservers(_value);
+                super.clearChanged();
+            }
     }
 
     /**
-     * Should calculate and update this Binding's _value from its internal arguments.
+     * Calculates and returns a value based on the arguments and this Binding's _bindingType.
+     * @param arg1
+     * @param arg2
+     * @return
      */
-    protected abstract T _calcValue(A1 arg1, A2 arg2);
+    protected abstract T _calcValue(Object arg1, Object arg2);
+
+    /**
+     * 'a()' overloading for Groovy.
+     * Equivalent to getValue()
+     * @return
+     */
+    public T call() {
+        return this.getValue();
+    }
 }

@@ -22,7 +22,7 @@ class RaxTester extends GroovyTestCase {
         assert a.getValue() == d.getValue();
     }
 
-    void testRaxSubscribeToChaining() {
+    void testRaxSubscribeChaining() {
         Rax a = new Rax(5);
         Rax b = new Rax();
         Rax c = new Rax();
@@ -35,12 +35,43 @@ class RaxTester extends GroovyTestCase {
         assert a.getValue() == c.getValue();
     }
 
+    void testRaxSubscribeToBinding() {
+        Rax a = new Rax(7);
+        Rax b = new Rax(2);
+        Rax c = new Rax();
+
+        c << a + b;
+
+        assert c() == 9
+
+        a.setValue(17)
+
+        assert c() == 19
+    }
+
+    void testRaxSetValueWhileSubscribedException() {
+        Rax a = new Rax(5);
+        Rax b = new Rax(a);
+
+        shouldFail (RuntimeException) {
+            b.setValue(1);
+        }
+    }
+
     void testRaxUpdateDifferentValueTypesException() {
         Rax a = new Rax(true);
         Rax b = new Rax(5);
 
         shouldFail (RuntimeException) {
             b << a;
+        }
+    }
+
+    void testRaxSubscribeToItselfException() {
+        Rax a = new Rax();
+
+        shouldFail (RuntimeException) {
+            a << a;
         }
     }
 }

@@ -7,7 +7,13 @@
     <groupId>reactxiom</groupId>
     <artifactId>ReactXiom</artifactId>
     <version>0.1</version>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+    </dependencies>
 
 
 </project>
