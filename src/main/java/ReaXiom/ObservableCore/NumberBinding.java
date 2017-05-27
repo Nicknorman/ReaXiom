@@ -1,4 +1,4 @@
-package ReaXiom.ObservableWrapper;
+package ReaXiom.ObservableCore;
 
 import com.sun.istack.internal.NotNull;
 
@@ -8,6 +8,9 @@ import java.util.Observable;
  * Created by Nick on 16-05-2017.
  */
 public class NumberBinding extends Binding<Number> {
+    /**
+     * The specific Number subclass that will be returned by this NumberBinding.
+     */
     private Class<? extends Number> _valueType;
 
     /**
@@ -64,11 +67,14 @@ public class NumberBinding extends Binding<Number> {
     /**
      * Sets this NumberBindings's _valueType based on arguments.
      * This is important as NumberBinding calculation methods require a specified return type.
+     * If BindingType is DIVIDE, the value type will always be set to Double.
      * @param arg1
      * @param arg2
      */
     private void initValueType(Number arg1, Number arg2) {
-        if (arg1 instanceof Double || arg2 instanceof Double)
+        if (_bindingType == BindingType.DIVIDE)
+            _valueType = Double.class;
+        else if (arg1 instanceof Double || arg2 instanceof Double)
             _valueType = Double.class;
         else if (arg1 instanceof Float || arg2 instanceof Float)
             _valueType = Float.class;

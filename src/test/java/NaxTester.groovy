@@ -1,11 +1,11 @@
-import ReaXiom.ObservableWrapper.Bax
-import ReaXiom.ObservableWrapper.Nax
-import ReaXiom.ObservableWrapper.Rax;
+import ReaXiom.ObservableCore.Bax
+import ReaXiom.ObservableCore.Nax
+import ReaXiom.ObservableCore.Rax;
 
 /**
  * Created by Nick on 10-05-2017.
  */
-class RaxTester extends GroovyTestCase {
+class NaxTester extends GroovyTestCase {
 
     void testRaxSubscribeToRax() {
         Rax a = new Nax(5);

@@ -1,4 +1,4 @@
-package ReaXiom.ObservableWrapper;
+package ReaXiom.ObservableCore;
 
 import java.util.Observable;
 
@@ -29,6 +29,7 @@ public class BooleanBinding extends Binding<Boolean> {
      * @param arg2
      * @return resulting Boolean.
      */
+    @Override
     protected Boolean _calcValue(Object arg1, Object arg2) {
         if (arg1 instanceof Boolean && arg2 instanceof Boolean)
             return calcBooleans((Boolean)arg1, (Boolean)arg2);

@@ -1,4 +1,4 @@
-package ReaXiom.ObservableWrapper;
+package ReaXiom.ObservableCore;
 
 /**
  * Created by Nick on 16-05-2017.

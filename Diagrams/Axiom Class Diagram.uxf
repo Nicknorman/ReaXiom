@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.2">
-  <zoom_level>5</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>525</x>
-      <y>220</y>
-      <w>130</w>
-      <h>75</h>
+      <x>672</x>
+      <y>189</y>
+      <w>182</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Observer&gt;&gt;
 /Axervable&lt;T&gt;/
@@ -25,10 +25,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>525</x>
-      <y>110</y>
-      <w>125</w>
-      <h>80</h>
+      <x>672</x>
+      <y>35</y>
+      <w>175</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>java.util::Observable
 --
@@ -46,10 +46,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>580</x>
-      <y>185</y>
-      <w>15</w>
-      <h>45</h>
+      <x>749</x>
+      <y>140</y>
+      <w>21</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
@@ -57,10 +57,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>250</x>
-      <y>330</y>
-      <w>240</w>
-      <h>105</h>
+      <x>287</x>
+      <y>343</y>
+      <w>336</w>
+      <h>147</h>
     </coordinates>
     <panel_attributes>/Binding&lt;T&gt;/
 --
@@ -81,10 +81,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>365</x>
-      <y>270</y>
-      <w>170</w>
-      <h>70</h>
+      <x>448</x>
+      <y>259</y>
+      <w>238</w>
+      <h>98</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>320.0;10.0;10.0;10.0;10.0;120.0</additional_attributes>
@@ -92,10 +92,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>320</x>
-      <y>510</y>
-      <w>260</w>
-      <h>60</h>
+      <x>385</x>
+      <y>595</y>
+      <w>364</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>NumberBinding
 --
@@ -108,10 +108,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>455</x>
-      <y>430</y>
-      <w>45</w>
-      <h>90</h>
+      <x>574</x>
+      <y>483</y>
+      <w>63</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 m1=&lt;Number&gt;</panel_attributes>
@@ -120,10 +120,10 @@ m1=&lt;Number&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>45</x>
-      <y>510</y>
-      <w>260</w>
-      <h>45</h>
+      <x>0</x>
+      <y>595</y>
+      <w>364</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>BooleanBinding
 --
@@ -135,10 +135,10 @@ m1=&lt;Number&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>270</x>
-      <y>430</y>
-      <w>45</w>
-      <h>90</h>
+      <x>315</x>
+      <y>483</y>
+      <w>63</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 m1=&lt;Boolean&gt;</panel_attributes>
@@ -147,12 +147,12 @@ m1=&lt;Boolean&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>665</x>
-      <y>320</y>
-      <w>175</w>
-      <h>110</h>
+      <x>868</x>
+      <y>329</y>
+      <w>245</w>
+      <h>154</h>
     </coordinates>
-    <panel_attributes>Rax&lt;T&gt;
+    <panel_attributes>/Rax&lt;T&gt;/
 --
 -subscribedTo: Observable
 --
@@ -169,10 +169,10 @@ m1=&lt;Boolean&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>270</y>
-      <w>105</w>
-      <h>60</h>
+      <x>847</x>
+      <y>259</y>
+      <w>147</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;190.0;10.0;190.0;100.0</additional_attributes>
@@ -180,10 +180,10 @@ m1=&lt;Boolean&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>95</x>
-      <y>135</y>
-      <w>110</w>
-      <h>160</h>
+      <x>42</x>
+      <y>168</y>
+      <w>154</w>
+      <h>224</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Enum&gt;&gt;
 BindingType
@@ -205,5 +205,62 @@ LESS_THAN,
 EQUAL_OR_GREATER_THAN,
 EQUAL_OR_LESS_THAN</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>798</x>
+      <y>595</y>
+      <w>147</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>Nax
+--
+--
++Nax(Observable obs)
++Nax(Number value)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>889</x>
+      <y>476</y>
+      <w>63</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+m1=&lt;Number&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1022</x>
+      <y>595</y>
+      <w>147</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>Bax
+--
+--
++Bax(Observable obs)
++Bax(Boolean value)
++Bax(Number value)
++not(): BooleanBinding</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1057</x>
+      <y>476</y>
+      <w>63</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+m1=&lt;Boolean&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
   </element>
 </diagram>

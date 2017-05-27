@@ -1,4 +1,4 @@
-package ReaXiom.ObservableWrapper;
+package ReaXiom.ObservableCore;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -16,6 +16,8 @@ public abstract class Binding<T> extends Axervable<T> {
 
     /**
      * Binds two observables together using the specified binding type.
+     * If both Observables are the same, it will only subscribe to the Observable once. This makes sure that no
+     * "double notifying" is done to this Binding's Observers.
      * @param obs1
      * @param obs2
      * @param bindingType The type of Binding that should describe the relationship between the two Observables' values.
@@ -29,7 +31,9 @@ public abstract class Binding<T> extends Axervable<T> {
 
         // Subscribe to both observables
         _obs1.addObserver(this);
-        _obs2.addObserver(this);
+        // Only subscribe to _obs2 if both observables are different
+        if (_obs1 != _obs2)
+            _obs2.addObserver(this);
     }
 
     /**
@@ -44,15 +48,17 @@ public abstract class Binding<T> extends Axervable<T> {
         this._obs1 = obs1;
         this._bindingType = bindingType;
 
-        // Subscribe to observer
-        _obs1.addObserver(this);
         // Set constant argument directly
         _arg2 = arg2;
+        // Subscribe to observer
+        _obs1.addObserver(this);
     }
 
     /**
      * Should only be called by one of the two Observables that this Binding is subscribed to.
      * Updates the value associated with one its two Observables.
+     * It's possible for this Binding's internal Observables to be the same, in which case both its internal values
+     * are set. Therefore, only one call to this Binding's update() is necessary.
      * @param observable
      * @param value
      */
@@ -63,6 +69,10 @@ public abstract class Binding<T> extends Axervable<T> {
         if (observable == _obs1) {
             if (_arg1 == null || _arg1.getClass().isInstance(value)) {
                 _arg1 = value;
+
+                // Also set _arg2 if both observables are the same, so that
+                if (_obs1 == _obs2)
+                    _arg2 = value;
                 _calcValueAndNotify();
             } else {
                 throw new RuntimeException("Subscribed value type " + value.getClass().toString() +
@@ -95,12 +105,12 @@ public abstract class Binding<T> extends Axervable<T> {
      * Notifies all its observers of the newly calculated value.
      */
     private void _calcValueAndNotify() {
-            if (_arg1 != null && _arg2 != null) {
-                // Update _value calculated from args
-                T newValue = _calcValue(_arg1, _arg2);
-                // Notify observers with internal calculated value
-                super._setValueAndNotify(newValue);
-            }
+        if (_arg1 != null && _arg2 != null) {
+            // Update _value calculated from args
+            T newValue = _calcValue(_arg1, _arg2);
+            // Notify observers with internal calculated value
+            super._setValueAndNotify(newValue);
+        }
     }
 
     /**

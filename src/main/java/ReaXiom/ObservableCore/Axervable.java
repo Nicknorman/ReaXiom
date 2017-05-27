@@ -1,4 +1,4 @@
-package ReaXiom.ObservableWrapper;
+package ReaXiom.ObservableCore;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -35,19 +35,21 @@ public abstract class Axervable<T> extends Observable implements Observer {
     }
 
     /**
-     * Sets this Axervable's value and notifies all of its observers.
-     * @param value
+     * Sets this Axervable's value and notifies all of its observers only if the new value is different to the
+     * old value.
+     * @param newValue
      */
-    protected void _setValueAndNotify(T value) {
-        _value = value;
-        super.setChanged();
-        super.notifyObservers(_value);
-        super.clearChanged();
+    protected void _setValueAndNotify(T newValue) {
+        if (_value != newValue) {
+            _value = newValue;
+            super.setChanged();
+            super.notifyObservers(_value);
+            super.clearChanged();
+        }
     }
 
     /**
-     * 'a()' overloading for Groovy
-     * Equivalent to getValue()
+     * 'a()' overloading for Groovy. Equivalent to getValue()
      * @return
      */
     public T call() {

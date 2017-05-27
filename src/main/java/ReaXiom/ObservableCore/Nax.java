@@ -1,4 +1,4 @@
-package ReaXiom.ObservableWrapper;
+package ReaXiom.ObservableCore;
 
 import java.util.Observable;
 
@@ -18,6 +18,16 @@ public class Nax extends Rax<Number> {
         super();
     }
 
+    /**
+     * '<<' overloading for Groovy. Is equivalent to setValue(Number number).
+     * Enables chaining.
+     * @param newValue
+     * @return this Observable
+     */
+    public Observable leftShift(Number newValue) {
+        this.setValue(newValue);
+        return this;
+    }
 
     /**
      * '+' overloading for Groovy

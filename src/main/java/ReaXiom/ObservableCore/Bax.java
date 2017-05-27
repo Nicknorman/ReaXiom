@@ -1,4 +1,4 @@
-package ReaXiom.ObservableWrapper;
+package ReaXiom.ObservableCore;
 
 import java.util.Observable;
 
@@ -17,6 +17,17 @@ public class Bax extends Rax<Boolean> {
 
     public Bax() {
         super();
+    }
+
+    /**
+     * '<<' overloading for Groovy. Is equivalent to setValue(Boolean value).
+     * Enables chaining.
+     * @param newValue
+     * @return this Observable
+     */
+    public Observable leftShift(Boolean newValue) {
+        this.setValue(newValue);
+        return this;
     }
 
     /**
