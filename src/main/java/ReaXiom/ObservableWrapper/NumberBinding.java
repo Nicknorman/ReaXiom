@@ -20,6 +20,11 @@ public class NumberBinding extends Binding<Number> {
         this._valueType = null;
     }
 
+    public NumberBinding(Observable obs1, Number arg2, BindingType type) {
+        super(obs1, arg2, type);
+        this._valueType = null;
+    }
+
     public NumberBinding(Observable obs1, Observable obs2, BindingType type, Class<? extends Number> valueType) {
         super(obs1, obs2, type);
         this._valueType = valueType;

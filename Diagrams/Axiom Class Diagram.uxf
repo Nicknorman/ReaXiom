@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>5</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>525</x>
+      <y>220</y>
+      <w>130</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Observer&gt;&gt;
+/Axervable&lt;T&gt;/
+--
+#value: T
+--
+/+update(Observable obs, Object arg)/
++addObserver(Observer observer)
++getValue(): T
+#setValueAndNotify(T value)
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>525</x>
+      <y>110</y>
+      <w>125</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>java.util::Observable
+--
+--
++addObserver(Observer observer)
++deleteObserver(Observer observer)
++deleteObservers()
++notifyObservers()
++notifyObservers(Object arg)
++hasChanged(): boolean
++countObservers(): int
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>580</x>
+      <y>185</y>
+      <w>15</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>250</x>
+      <y>330</y>
+      <w>240</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>/Binding&lt;T&gt;/
+--
+-obs1: Observable
+-obs2: Observable
+-arg1: Object
+-arg2: Object
+#bindingType: BindingType
+--
++Binding(Observable obs1, Observable obs2, BindingType bindingType)
++Binding(Observable obs1, T arg2, BindingType bindingType)
++update(Observable obs, Object arg) &lt;&lt;Override&gt;&gt;
++addObserver(Observer observer) &lt;&lt;Override&gt;&gt;
+-calcValueAndNotify()
+/#calcValue(Object arg1, Object arg2): T/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>365</x>
+      <y>270</y>
+      <w>170</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>320.0;10.0;10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>320</x>
+      <y>510</y>
+      <w>260</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>NumberBinding
+--
+--
++NumberBinding(Observable obs1, Observable obs2, BindingType bindingType)
++NumberBinding(..., Class&lt;? extends Number&gt; valueType)
+/#calcValue(Object arg1, Object arg2): Number</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>455</x>
+      <y>430</y>
+      <w>45</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+m1=&lt;Number&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>45</x>
+      <y>510</y>
+      <w>260</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>BooleanBinding
+--
+--
++BooleanBinding(Observable obs1, Observable obs2, BindingType bindingType)
+/#calcValue(Object arg1, Object arg2): Boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>430</y>
+      <w>45</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+m1=&lt;Boolean&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>665</x>
+      <y>320</y>
+      <w>175</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Rax&lt;T&gt;
+--
+-subscribedTo: Observable
+--
++Rax()
++Rax(T value)
++Rax(Observable observable)
++update(Observable obs, Object arg) &lt;&lt;Override&gt;&gt;
++addObserver(Observer observer) &lt;&lt;Override&gt;&gt;
++setValue(T newValue)
++subscribeTo(Observable obs): Observable[this]
++clearSubscription()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>650</x>
+      <y>270</y>
+      <w>105</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;190.0;10.0;190.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>95</x>
+      <y>135</y>
+      <w>110</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enum&gt;&gt;
+BindingType
+--
+ADD,
+SUBTRACT,    
+MULTIPLY,
+DIVIDE,
+POWER,
+MOD,
+OR,
+XOR,
+AND,
+NOT,
+EQUAL_TO,
+NOT_EQUAL_TO,
+GREATER_THAN,
+LESS_THAN,
+EQUAL_OR_GREATER_THAN,
+EQUAL_OR_LESS_THAN</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

@@ -1,3 +1,5 @@
+import ReaXiom.ObservableWrapper.Bax
+import ReaXiom.ObservableWrapper.Nax
 import ReaXiom.ObservableWrapper.Rax
 
 /**
@@ -6,11 +8,11 @@ import ReaXiom.ObservableWrapper.Rax
 class BooleanBindingTester extends GroovyTestCase {
 
     void testBooleanBindingsBooleanValues() {
-        Rax a = new Rax(false);
-        Rax b = new Rax(false);
-        Rax and = new Rax(a & b);
-        Rax or = new Rax(a | b);
-        Rax xor = new Rax(a ^ b);
+        Rax a = new Bax(false);
+        Rax b = new Bax(false);
+        Rax and = new Bax(a & b);
+        Rax or = new Bax(a | b);
+        Rax xor = new Bax(a ^ b);
 
         assert !and()
         assert !or()
@@ -30,14 +32,14 @@ class BooleanBindingTester extends GroovyTestCase {
     }
 
     void testBooleanBindingsBooleanValuesThreeRax() {
-        Rax a = new Rax(false)
-        Rax b = new Rax(false)
-        Rax c = new Rax(false)
-        Rax and = new Rax(a & b & c)
-        Rax or = new Rax(a | b | c)
-        Rax xor = new Rax(a ^ b ^ c)
-        Rax andOr = new Rax(a & b | c)
-        Rax xorAnd = new Rax((a ^ b) & c)
+        Bax a = new Bax(false)
+        Bax b = new Bax(false)
+        Bax c = new Bax(false)
+        Bax and = a & b & c
+        Bax or = a | b | c
+        Bax xor = a ^ b ^ c
+        Bax andOr = a & b | c
+        Bax xorAnd = (a ^ b) & c
 
         assert !and()
         assert !or()
@@ -71,15 +73,15 @@ class BooleanBindingTester extends GroovyTestCase {
     }
 
     void testBooleanBindingsNumberValues() {
-        Rax a = new Rax(10)
-        Rax b = new Rax(10)
+        Nax a = new Nax(10)
+        Nax b = new Nax(10)
 
-        Rax equal = new Rax(a.equalTo(b))
-        Rax notEqual = new Rax(a.notEqualTo(b))
-        Rax greater = new Rax(a.greaterThan(b))
-        Rax less = new Rax(a.lessThan(b))
-        Rax greaterOrEqual = new Rax(a.equalOrGreaterThan(b))
-        Rax lessOrEqual = new Rax(a.equalOrLessThan(b))
+        Bax equal = new Bax(a.equalTo(b))
+        Bax notEqual = new Bax(a.notEqualTo(b))
+        Bax greater = new Bax(a.greaterThan(b))
+        Bax less = new Bax(a.lessThan(b))
+        Bax greaterOrEqual = new Bax(a.equalOrGreaterThan(b))
+        Bax lessOrEqual = new Bax(a.equalOrLessThan(b))
 
         assert equal()
         assert !notEqual()

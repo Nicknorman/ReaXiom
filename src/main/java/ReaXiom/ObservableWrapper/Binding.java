@@ -7,16 +7,15 @@ import java.util.Observer;
  * Created by Nick on 10-05-2017.
  * Binds 2 Observables
  */
-public abstract class Binding<T> extends ObservableAxiom {
+public abstract class Binding<T> extends Axervable<T> {
     private Observable _obs1;
     private Observable _obs2;
     private Object _arg1;
     private Object _arg2;
-    private T _value;
     protected BindingType _bindingType;
 
     /**
-     *
+     * Binds two observables together using the specified binding type.
      * @param obs1
      * @param obs2
      * @param bindingType The type of Binding that should describe the relationship between the two Observables' values.
@@ -34,11 +33,21 @@ public abstract class Binding<T> extends ObservableAxiom {
     }
 
     /**
-     * Unsafe if returned value is changed.
-     * @return
+     * Binds an observable and a constant value together using the specified binding type.
+     * @param obs1
+     * @param arg2
+     * @param bindingType
      */
-    public T getValue() {
-        return _value;
+    public Binding(Observable obs1, Object arg2, BindingType bindingType) {
+        super();
+
+        this._obs1 = obs1;
+        this._bindingType = bindingType;
+
+        // Subscribe to observer
+        _obs1.addObserver(this);
+        // Set constant argument directly
+        _arg2 = arg2;
     }
 
     /**
@@ -88,11 +97,9 @@ public abstract class Binding<T> extends ObservableAxiom {
     private void _calcValueAndNotify() {
             if (_arg1 != null && _arg2 != null) {
                 // Update _value calculated from args
-                _value = _calcValue(_arg1, _arg2);
+                T newValue = _calcValue(_arg1, _arg2);
                 // Notify observers with internal calculated value
-                super.setChanged();
-                super.notifyObservers(_value);
-                super.clearChanged();
+                super._setValueAndNotify(newValue);
             }
     }
 

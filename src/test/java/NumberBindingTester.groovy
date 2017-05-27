@@ -1,5 +1,6 @@
 import ReaXiom.ObservableWrapper.BindingType
 import ReaXiom.ObservableWrapper.Binding
+import ReaXiom.ObservableWrapper.Nax
 import ReaXiom.ObservableWrapper.NumberBinding
 import ReaXiom.ObservableWrapper.Rax
 
@@ -8,8 +9,8 @@ import ReaXiom.ObservableWrapper.Rax
  */
 class NumberBindingTester extends GroovyTestCase {
     void testNumberBindingInteger() {
-        Rax a = new Rax(5);
-        Rax b = new Rax(2);
+        Rax a = new Nax(5);
+        Rax b = new Nax(2);
         Binding binding = new NumberBinding(a, b, BindingType.ADD);
 
         assert binding.getValue().class == Integer.class
@@ -19,22 +20,22 @@ class NumberBindingTester extends GroovyTestCase {
 
         assert binding.getValue() == 12
 
-        Rax c = new Rax(binding);
+        Rax c = new Nax(binding);
 
         assert c() == 12
     }
 
     void testNumberBindingDouble() {
-        Rax a = new Rax(1.25d);
-        Rax b = new Rax(3);
+        Rax a = new Nax(1.25d);
+        Rax b = new Nax(3);
         Binding binding = new NumberBinding(a, b, BindingType.ADD);
 
         assert binding.getValue() == 4.25
     }
 
     void testNumberBindingOperatorOverloading() {
-        Rax a = new Rax(12);
-        Rax b = new Rax(5);
+        Nax a = new Nax(12);
+        Nax b = new Nax(5);
         Binding plus = a + b;
         Binding sub = a - b;
         Binding mult = a * b;
@@ -51,9 +52,10 @@ class NumberBindingTester extends GroovyTestCase {
     }
 
     void testNumberBindingThreeRaxOperatorOverloading() {
-        Rax a = new Rax(12);
-        Rax b = new Rax(5);
-        Rax c = new Rax(2);
+        Nax a = new Nax(12);
+        Nax b = new Nax(5);
+        Nax c = new Nax(2);
+
         Binding b1 = a + b - c;
         Binding b2 = a - b + c;
         Binding b3 = a * b * c;

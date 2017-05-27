@@ -6,16 +6,15 @@ import java.util.Observer;
 /**
  * Created by Nick on 06-05-2017.
  */
-public class Rax<T> extends ObservableAxiom {
+public abstract class Rax<T> extends Axervable<T> {
     private Observable _subscribedTo;
-    private T _value;
 
-    public Rax(T value) {
+    protected Rax(T value) {
         this();
         this._value = value;
     }
 
-    public Rax(Observable observable) {
+    protected Rax(Observable observable) {
         this();
         this.subscribeTo(observable);
     }
@@ -27,7 +26,7 @@ public class Rax<T> extends ObservableAxiom {
     /**
      * Should only be called by the Observable that this Rax is subscribed to.
      *
-     * Updates this Rax's value and notifies all of its observers if {o} corrensponds to its _subscribedTo Observable,
+     * Updates this Rax's value and notifies all of its observers if {o} corresponds to its _subscribedTo Observable,
      * and {arg}'s type is the same type as this Rax's internal _value's type.
      * @param o
      * @param arg
@@ -66,14 +65,6 @@ public class Rax<T> extends ObservableAxiom {
     }
 
     /**
-     * Unsafe if returned value is changed.
-     * @return
-     */
-    public T getValue() {
-        return _value;
-    }
-
-    /**
      * Binds this Rax to an Observable.
      * @param observable
      * @return itself as Observable to allow for chaining Observables.
@@ -102,31 +93,6 @@ public class Rax<T> extends ObservableAxiom {
             _subscribedTo.deleteObserver(this);
             _subscribedTo = null;
         }
-    }
-
-    @Override
-    public String toString() {
-        return this.getValue().toString();
-    }
-
-    /**
-     * Sets this Rax's value and notifies all of its observers.
-     * @param value
-     */
-    private void _setValueAndNotify(T value) {
-        _value = value;
-        super.setChanged();
-        super.notifyObservers(_value);
-        super.clearChanged();
-    }
-
-    /**
-     * 'a()' overloading for Groovy
-     * Equivalent to getValue()
-     * @return
-     */
-    public T call() {
-        return this.getValue();
     }
 
     /**

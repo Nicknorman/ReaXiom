@@ -1,3 +1,5 @@
+import ReaXiom.ObservableWrapper.Bax
+import ReaXiom.ObservableWrapper.Nax
 import ReaXiom.ObservableWrapper.Rax;
 
 /**
@@ -6,26 +8,26 @@ import ReaXiom.ObservableWrapper.Rax;
 class RaxTester extends GroovyTestCase {
 
     void testRaxSubscribeToRax() {
-        Rax a = new Rax(5);
-        Rax b = new Rax(a);
+        Rax a = new Nax(5);
+        Rax b = new Nax(a);
 
         assert a.getValue() == b.getValue()
 
-        Rax c = new Rax();
+        Rax c = new Nax();
         c.subscribeTo(a);
 
         assert a.getValue() == c.getValue();
 
-        Rax d = new Rax();
+        Rax d = new Nax();
         d << a;
 
         assert a.getValue() == d.getValue();
     }
 
     void testRaxSubscribeChaining() {
-        Rax a = new Rax(5);
-        Rax b = new Rax();
-        Rax c = new Rax();
+        Rax a = new Nax(5);
+        Rax b = new Nax();
+        Rax c = new Nax();
         c << b << a;
 
         assert a.getValue() == c.getValue();
@@ -36,9 +38,9 @@ class RaxTester extends GroovyTestCase {
     }
 
     void testRaxSubscribeToBinding() {
-        Rax a = new Rax(7);
-        Rax b = new Rax(2);
-        Rax c = new Rax();
+        Nax a = new Nax(7);
+        Nax b = new Nax(2);
+        Nax c = new Nax();
 
         c << a + b;
 
@@ -50,8 +52,8 @@ class RaxTester extends GroovyTestCase {
     }
 
     void testRaxSetValueWhileSubscribedException() {
-        Rax a = new Rax(5);
-        Rax b = new Rax(a);
+        Nax a = new Nax(5);
+        Nax b = new Nax(a);
 
         shouldFail (RuntimeException) {
             b.setValue(1);
@@ -59,8 +61,8 @@ class RaxTester extends GroovyTestCase {
     }
 
     void testRaxUpdateDifferentValueTypesException() {
-        Rax a = new Rax(true);
-        Rax b = new Rax(5);
+        Rax a = new Bax(true);
+        Rax b = new Nax(5);
 
         shouldFail (RuntimeException) {
             b << a;
@@ -68,7 +70,7 @@ class RaxTester extends GroovyTestCase {
     }
 
     void testRaxSubscribeToItselfException() {
-        Rax a = new Rax();
+        Rax a = new Nax();
 
         shouldFail (RuntimeException) {
             a << a;

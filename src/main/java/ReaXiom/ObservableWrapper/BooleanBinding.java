@@ -15,6 +15,14 @@ public class BooleanBinding extends Binding<Boolean> {
         super(obs1, obs2, bindingType);
     }
 
+    public BooleanBinding(Observable obs1, Boolean arg2, BindingType bindingType) {
+        super(obs1, arg2, bindingType);
+    }
+
+    public BooleanBinding(Observable obs1, Number arg2, BindingType bindingType) {
+        super(obs1, arg2, bindingType);
+    }
+
     /**
      * Both arguments must either both be Booleans or Numbers.
      * @param arg1
@@ -55,4 +63,45 @@ public class BooleanBinding extends Binding<Boolean> {
             return arg1.doubleValue() > arg2.doubleValue();
         throw new RuntimeException("Boolean binding type is not an usable value when comparing numbers: " + _bindingType);
     }
+
+    /**
+     * Returns a BooleanBinding that will always be the opposite of this boolean.
+     * @return
+     */
+    public BooleanBinding not() {
+        return this.xor(true);
+    }
+
+    /**
+     * '&' overloading for Groovy.
+     * @param observable
+     * @return
+     */
+    public BooleanBinding and(Observable observable) { return new BooleanBinding(this, observable, BindingType.AND); }
+
+    public BooleanBinding and(Boolean value) { return new BooleanBinding(this, value, BindingType.AND); }
+
+    public BooleanBinding and(Number value) { return new BooleanBinding(this, value, BindingType.AND); }
+
+    /**
+     * '|' overloading for Groovy.
+     * @param observable
+     * @return
+     */
+    public BooleanBinding or(Observable observable) { return new BooleanBinding(this, observable, BindingType.OR); }
+
+    public BooleanBinding or(Boolean value) { return new BooleanBinding(this, value, BindingType.OR); }
+
+    public BooleanBinding or(Number value) { return new BooleanBinding(this, value, BindingType.OR); }
+
+    /**
+     * '^' overloading for Groovy.
+     * @param observable
+     * @return
+     */
+    public BooleanBinding xor(Observable observable) { return new BooleanBinding(this, observable, BindingType.XOR); }
+
+    public BooleanBinding xor(Boolean value) { return new BooleanBinding(this, value, BindingType.XOR); }
+
+    public BooleanBinding xor(Number value) { return new BooleanBinding(this, value, BindingType.XOR); }
 }
