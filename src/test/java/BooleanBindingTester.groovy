@@ -35,11 +35,11 @@ class BooleanBindingTester extends GroovyTestCase {
         Bax a = new Bax(false)
         Bax b = new Bax(false)
         Bax c = new Bax(false)
-        Bax and = a & b & c
-        Bax or = a | b | c
-        Bax xor = a ^ b ^ c
-        Bax andOr = a & b | c
-        Bax xorAnd = (a ^ b) & c
+        Bax and = new Bax(a & b & c)
+        Bax or = new Bax(a | b | c)
+        Bax xor = new Bax(a ^ b ^ c)
+        Bax andOr = new Bax(a & b | c)
+        Bax xorAnd = new Bax((a ^ b) & c)
 
         assert !and()
         assert !or()
