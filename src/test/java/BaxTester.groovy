@@ -17,4 +17,15 @@ class BaxTester extends GroovyTestCase {
 
         assert !b()
     }
+
+    public void testBaxChangeListener() {
+        Bax a = new Bax();
+
+        a.addListener({obs, o, n ->
+            assert o != n
+        })
+
+        a << false
+        a << true
+    }
 }

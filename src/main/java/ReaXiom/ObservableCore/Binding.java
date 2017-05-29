@@ -91,25 +91,13 @@ public abstract class Binding<T> extends Axervable<T> {
     }
 
     /**
-     * Add observer and update the Observer instantly.
-     * @param observer
-     */
-    @Override
-    public void addObserver(Observer observer) {
-        super.addObserver(observer);
-        observer.update(this, _value);
-    }
-
-    /**
      * Calls _calcValue() if both internal arguments are not null.
      * Notifies all its observers of the newly calculated value.
      */
     private void _calcValueAndNotify() {
         if (_arg1 != null && _arg2 != null) {
-            // Update _value calculated from args
-            T newValue = _calcValue(_arg1, _arg2);
             // Notify observers with internal calculated value
-            super._setValueAndNotify(newValue);
+            super._setValueAndNotify(_calcValue(_arg1, _arg2));
         }
     }
 

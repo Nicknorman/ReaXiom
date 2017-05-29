@@ -11,7 +11,7 @@ public abstract class Rax<T> extends Axervable<T> {
 
     protected Rax(T value) {
         this();
-        this._value = value;
+        super._setValue(value);
     }
 
     protected Rax(Observable observable) {
@@ -32,24 +32,16 @@ public abstract class Rax<T> extends Axervable<T> {
      * @param arg
      */
     public void update(Observable o, Object arg) {
+        T value = super.getValue();
+
         if (o == _subscribedTo) {
-            if (_value == null || _value.getClass().isInstance(arg)) {
+            if (value == null || value.getClass().isInstance(arg)) {
                 this._setValueAndNotify((T)arg);
             } else {
                 throw new RuntimeException("Subscribed value type " + arg.getClass().toString() +
-                        " differs from " + _value.getClass().toString());
+                        " differs from " + value.getClass().toString());
             }
         }
-    }
-
-    /**
-     * Add observer and update the Observer instantly.
-     * @param observer
-     */
-    @Override
-    public void addObserver(Observer observer) {
-        super.addObserver(observer);
-        observer.update(this, _value);
     }
 
     /**
@@ -68,6 +60,7 @@ public abstract class Rax<T> extends Axervable<T> {
      * Binds this Rax to an Observable.
      * @param observable
      * @return itself as Observable to allow for chaining Observables.
+     * @throws RuntimeException if subscribing to itself
      */
     public Observable subscribeTo(Observable observable) {
         if (observable == this) {
