@@ -1,4 +1,4 @@
-package ReaXiom.ObservableCore;
+package ReaXiom.core;
 
 import java.util.Observable;
 

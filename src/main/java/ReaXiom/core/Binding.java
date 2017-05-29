@@ -1,7 +1,6 @@
-package ReaXiom.ObservableCore;
+package ReaXiom.core;
 
 import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Created by Nick on 10-05-2017.

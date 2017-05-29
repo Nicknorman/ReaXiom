@@ -1,4 +1,4 @@
-import ReaXiom.ObservableCore.Bax
+import ReaXiom.core.Bax
 
 /**
  * Created by Nick on 27-05-2017.

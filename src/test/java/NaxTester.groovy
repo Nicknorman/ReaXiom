@@ -1,6 +1,6 @@
-import ReaXiom.ObservableCore.Bax
-import ReaXiom.ObservableCore.Nax
-import ReaXiom.ObservableCore.Rax;
+import ReaXiom.core.Bax
+import ReaXiom.core.Nax
+import ReaXiom.core.Rax;
 
 /**
  * Created by Nick on 10-05-2017.

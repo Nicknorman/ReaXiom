@@ -1,6 +1,4 @@
-package ReaXiom.ObservableCore;
-
-import com.sun.istack.internal.NotNull;
+package ReaXiom.core;
 
 import java.util.Observable;
 
@@ -84,7 +82,6 @@ public class NumberBinding extends Binding<Number> {
             _valueType = Integer.class;
     }
 
-    @NotNull
     private static Number addNumbers(Number a, Number b, Class<? extends Number> returnType) {
         if (returnType == Double.class)
             return a.doubleValue() + b.doubleValue();
@@ -97,7 +94,6 @@ public class NumberBinding extends Binding<Number> {
         throw new RuntimeException("Return type not specified as one of the allowed values: " + returnType);
     }
 
-    @NotNull
     private static Number subtractNumbers(Number a, Number b, Class<? extends Number> returnType) {
         if (returnType == Double.class)
             return a.doubleValue() - b.doubleValue();
@@ -110,7 +106,6 @@ public class NumberBinding extends Binding<Number> {
         throw new RuntimeException("Return type not specified as one of the allowed values: " + returnType);
     }
 
-    @NotNull
     private static Number multiplyNumbers(Number a, Number b, Class<? extends Number> returnType) {
         if (returnType == Double.class)
             return a.doubleValue() * b.doubleValue();
@@ -123,7 +118,6 @@ public class NumberBinding extends Binding<Number> {
         throw new RuntimeException("Return type not specified as one of the allowed values: " + returnType);
     }
 
-    @NotNull
     private static Number divideNumbers(Number a, Number b, Class<? extends Number> returnType) {
         if (returnType == Double.class)
             return a.doubleValue() / b.doubleValue();
@@ -136,7 +130,6 @@ public class NumberBinding extends Binding<Number> {
         throw new RuntimeException("Return type not specified as one of the allowed values: " + returnType);
     }
 
-    @NotNull
     private static Number modNumbers(Number a, Number b, Class<? extends Number> returnType) {
         if (returnType == Double.class)
             return a.doubleValue() % b.doubleValue();
@@ -149,7 +142,6 @@ public class NumberBinding extends Binding<Number> {
         throw new RuntimeException("Return type not specified as one of the allowed values: " + returnType);
     }
 
-    @NotNull
     private static Number powNumbers(Number a, Number b, Class<? extends Number> returnType) {
         if (returnType == Double.class)
             return Math.pow(a.doubleValue(), b.doubleValue());

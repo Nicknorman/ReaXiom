@@ -1,4 +1,4 @@
-package ReaXiom.ObservableCore;
+package ReaXiom.core;
 
 /**
  * Created by Nick on 16-05-2017.

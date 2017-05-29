@@ -1,8 +1,8 @@
-import ReaXiom.ObservableCore.BindingType
-import ReaXiom.ObservableCore.Binding
-import ReaXiom.ObservableCore.Nax
-import ReaXiom.ObservableCore.NumberBinding
-import ReaXiom.ObservableCore.Rax
+import ReaXiom.core.BindingType
+import ReaXiom.core.Binding
+import ReaXiom.core.Nax
+import ReaXiom.core.NumberBinding
+import ReaXiom.core.Rax
 
 /**
  * Created by Nick on 17-05-2017.
