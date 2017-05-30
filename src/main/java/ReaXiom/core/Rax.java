@@ -6,14 +6,15 @@ import java.util.Observable;
  * Created by Nick on 06-05-2017.
  */
 public abstract class Rax<T> extends Axervable<T> {
-    private Observable _subscribedTo;
+    private Axervable<T> _subscribedTo;
 
     protected Rax(T value) {
         this();
-        super._setValue(value);
+        // No need to notify as this Rax has no Observers yet
+        super._setValueWithoutNotifying(value);
     }
 
-    protected Rax(Observable observable) {
+    protected Rax(Axervable<T> observable) {
         this();
         this.subscribeTo(observable);
     }
@@ -24,7 +25,6 @@ public abstract class Rax<T> extends Axervable<T> {
 
     /**
      * Should only be called by the Observable that this Rax is subscribed to.
-     *
      * Updates this Rax's value and notifies all of its observers if {o} corresponds to its _subscribedTo Observable,
      * and {arg}'s type is the same type as this Rax's internal _value's type.
      * @param o
@@ -52,7 +52,7 @@ public abstract class Rax<T> extends Axervable<T> {
         if (_subscribedTo != null) {
             throw new RuntimeException("Bound object cannot be set");
         }
-        this._setValueAndNotify(newValue);
+        super._setValueAndNotify(newValue);
     }
 
     /**
@@ -61,7 +61,7 @@ public abstract class Rax<T> extends Axervable<T> {
      * @return itself as Observable to allow for chaining Observables.
      * @throws RuntimeException if subscribing to itself
      */
-    public Observable subscribeTo(Observable observable) {
+    public Axervable<T> subscribeTo(Axervable<T> observable) {
         if (observable == this) {
             throw new RuntimeException("Rax cannot subscribe to itself");
         }
@@ -93,7 +93,18 @@ public abstract class Rax<T> extends Axervable<T> {
      * @param observable
      * @return
      */
-    public Observable leftShift(Observable observable) {
+    public Axervable<T> leftShift(Axervable<T> observable) {
         return this.subscribeTo(observable);
+    }
+
+    /**
+     * '<<' overloading for Groovy. Is equivalent to setValue(T value).
+     * Enables chaining.
+     * @param newValue
+     * @return this Observable
+     */
+    public Axervable<T> leftShift(T newValue) {
+        this._setValueAndNotify(newValue);
+        return this;
     }
 }

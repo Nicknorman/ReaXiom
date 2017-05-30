@@ -57,27 +57,32 @@ public abstract class Axervable<T> extends Observable implements Observer {
      * @param newValue
      */
     protected void _setValueAndNotify(T newValue) {
+        // Checking that new value is different makes sure to end cyclic updating when Axervables are bound bidirectional
         if (_value != newValue) {
             T oldValue = _value;
-            _value = newValue;
+            _setValueWithoutNotifying(newValue);
 
             // Invoke all ChangeListeners
             for (ChangeListener<T> cl : changeListeners) {
                 cl.observableChanged(this, oldValue, _value);
             }
 
-            // Notify all Observers
-            super.setChanged();
-            super.notifyObservers(_value);
-            super.clearChanged();
+            _notify();
         }
+    }
+
+    protected void _notify() {
+        // Notify all Observers
+        super.setChanged();
+        super.notifyObservers(_value);
+        super.clearChanged();
     }
 
     /**
      * Sets internal value without notifying Observers.
      * @param value
      */
-    protected void _setValue(T value) {
+    protected void _setValueWithoutNotifying(T value) {
         _value = value;
     }
 
@@ -91,6 +96,6 @@ public abstract class Axervable<T> extends Observable implements Observer {
 
     @Override
     public String toString() {
-        return this.getValue().toString();
+        return this.getClass().getSimpleName() + " (" + this.getValue().toString() + ")";
     }
 }

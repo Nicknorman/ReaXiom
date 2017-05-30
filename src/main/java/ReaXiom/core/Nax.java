@@ -10,23 +10,12 @@ public class Nax extends Rax<Number> {
         super(value);
     }
 
-    public Nax(Observable obs) {
+    public Nax(Axervable<Number> obs) {
         super(obs);
     }
 
     public Nax() {
         super();
-    }
-
-    /**
-     * '<<' overloading for Groovy. Is equivalent to setValue(Number number).
-     * Enables chaining.
-     * @param newValue
-     * @return this Observable
-     */
-    public Observable leftShift(Number newValue) {
-        this.setValue(newValue);
-        return this;
     }
 
     /**
