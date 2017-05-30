@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 /**
  * Created by Nick on 30-05-2017.
+ * Holds an array.
  */
 public class Vex<T> extends Rax<T[]> {
     private boolean holdsAxervables = false;

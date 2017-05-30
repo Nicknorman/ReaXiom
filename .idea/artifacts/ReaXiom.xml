@@ -2,7 +2,7 @@
   <artifact type="jar" name="ReaXiom">
     <output-path>$PROJECT_DIR$/out/artifacts/ReaXiom</output-path>
     <root id="archive" name="ReaXiom.jar">
-      <element id="module-output" name="ReactXiom" />
+      <element id="module-output" name="ReaXiom" />
     </root>
   </artifact>
 </component>

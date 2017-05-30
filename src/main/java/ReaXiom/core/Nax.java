@@ -4,6 +4,7 @@ import java.util.Observable;
 
 /**
  * Created by Nick on 26-05-2017.
+ * Holds a number.
  */
 public class Nax extends Rax<Number> {
     public Nax(Number value) {

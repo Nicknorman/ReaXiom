@@ -4,6 +4,7 @@ import java.util.Observable;
 
 /**
  * Created by Nick on 27-05-2017.
+ * Holds a Boolean
  */
 public class Bax extends Rax<Boolean> {
 
