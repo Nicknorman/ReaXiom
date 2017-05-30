@@ -1,6 +1,7 @@
 package ReaXiom.core;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -43,12 +44,17 @@ public abstract class Axervable<T> extends Observable implements Observer {
         changeListeners.remove(listener);
     }
 
+    public Collection<ChangeListener<T>> getChangeListeners() {
+        return changeListeners;
+    }
+
     /**
-     * Unsafe if returned value is changed.
      * @return value held by this Axervable.
      */
     public T getValue() {
-        return _value;
+        if (_value != null)
+            return _cloneValue(_value);
+        return null;
     }
 
     /**
@@ -62,20 +68,28 @@ public abstract class Axervable<T> extends Observable implements Observer {
             T oldValue = _value;
             _setValueWithoutNotifying(newValue);
 
+            T clonedValue = _cloneValue(newValue);
+
             // Invoke all ChangeListeners
             for (ChangeListener<T> cl : changeListeners) {
-                cl.observableChanged(this, oldValue, _value);
+                cl.observableChanged(this, oldValue, clonedValue);
             }
 
-            _notify();
+            // Notify all Observers
+            super.setChanged();
+            super.notifyObservers(_cloneValue(_value));
+            super.clearChanged();
         }
     }
 
-    protected void _notify() {
-        // Notify all Observers
-        super.setChanged();
-        super.notifyObservers(_value);
-        super.clearChanged();
+    /**
+     * Used for notifying Observers with a read-only value.
+     * Subclasses should override this if the internal value is clonable.
+     * @param value
+     * @return
+     */
+    protected T _cloneValue(T value) {
+        return value;
     }
 
     /**

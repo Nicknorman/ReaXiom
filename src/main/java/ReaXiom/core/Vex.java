@@ -24,12 +24,13 @@ public class Vex<T> extends Rax<T[]> {
             this.holdsAxervables = true;
 
             // Instantiate change listener that should be added to all Axervables contained in array
+            // TODO: as of now, this won't matter since value is not read-only
             axervableListener = new ChangeListener<T>() {
                 @Override
                 public void observableChanged(Axervable<T> obs, T oldValue, T newValue) {
                     // If Axervable is still contained in array, then notify observers, else remove this listener
                     if (Arrays.stream(values).anyMatch(v -> v == obs)) {
-                        Vex.super._notify();
+                        Vex.super._setValueAndNotify(values.clone());
                     } else {
                         obs.removeListener(this);
                     }
@@ -49,14 +50,6 @@ public class Vex<T> extends Rax<T[]> {
     }
 
     /**
-     * @return a read-only array held by this Vex
-     */
-    @Override
-    public T[] getValue() {
-        return super.getValue().clone();
-    }
-
-    /**
      * {@inheritDoc}
      * @param newArray
      */
@@ -72,6 +65,16 @@ public class Vex<T> extends Rax<T[]> {
         }
 
         super.setValue(clonedArray);
+    }
+
+    /**
+     * Clones an array
+     * @param value
+     * @return cloned array
+     */
+    @Override
+    protected T[] _cloneValue(T[] value) {
+        return Arrays.copyOf(value, value.length);
     }
 
     /**
