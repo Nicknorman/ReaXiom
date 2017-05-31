@@ -1,0 +1,4 @@
+TODO:
+
+Weak references på Observers og Observables
+Bind bidirectional

@@ -59,11 +59,11 @@ public abstract class Axervable<T> extends Observable implements Observer {
 
     /**
      * Sets this Axervable's value only if the new value is different to the old value. Notifies all of its observers
-     * and invokes all ChangeListeners registered.
+     * and invokes all ChangeListeners registered. Checking that new value is different makes sure to end cyclic
+     * updating when Axervables are bound bidirectional
      * @param newValue
      */
     protected void _setValueAndNotify(T newValue) {
-        // Checking that new value is different makes sure to end cyclic updating when Axervables are bound bidirectional
         if (_value != newValue) {
             T oldValue = _value;
             _setValueWithoutNotifying(newValue);
