@@ -11,17 +11,17 @@ class NaxTester extends GroovyTestCase {
         Rax a = new Nax(5);
         Rax b = new Nax(a);
 
-        assert a.getValue() == b.getValue()
+        assert a.get() == b.get()
 
         Rax c = new Nax();
         c.subscribeTo(a);
 
-        assert a.getValue() == c.getValue();
+        assert a.get() == c.get();
 
         Rax d = new Nax();
         d << a;
 
-        assert a.getValue() == d.getValue();
+        assert a.get() == d.get();
     }
 
     void testRaxSubscribeChaining() {
@@ -30,11 +30,11 @@ class NaxTester extends GroovyTestCase {
         Rax c = new Nax();
         c << b << a;
 
-        assert a.getValue() == c.getValue();
+        assert a.get() == c.get();
 
-        a.setValue(10);
+        a.set(10);
 
-        assert a.getValue() == c.getValue();
+        assert a.get() == c.get();
     }
 
     void testRaxSubscribeToBinding() {
@@ -46,17 +46,17 @@ class NaxTester extends GroovyTestCase {
 
         assert c() == 9
 
-        a.setValue(17)
+        a.set(17)
 
         assert c() == 19
     }
 
-    void testRaxSetValueWhileSubscribedException() {
+    void testRaxsetWhileSubscribedException() {
         Nax a = new Nax(5);
         Nax b = new Nax(a);
 
         shouldFail (RuntimeException) {
-            b.setValue(1);
+            b.set(1);
         }
     }
 

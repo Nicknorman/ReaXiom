@@ -12,7 +12,8 @@ public class Vex<T> extends Rax<T[]> {
 
     /**
      * Creates a new Vex containing the specified array.
-     * If elements contained in array are Axervables, this Vex will notify its observers whenever an element changes
+     * If elements contained in array are Axervables, this Vex will notify its
+     * observers whenever an element changes
      * its value.
      * @param values
      */
@@ -23,12 +24,15 @@ public class Vex<T> extends Rax<T[]> {
         if (values[0] instanceof Axervable) {
             this.holdsAxervables = true;
 
-            // Instantiate change listener that should be added to all Axervables contained in array
+            // Instantiate change listener that should be added to all 
+            // Axervables contained in array
             // TODO: as of now, this won't matter since value is not read-only
             axervableListener = new ChangeListener<T>() {
                 @Override
-                public void observableChanged(Axervable<T> obs, T oldValue, T newValue) {
-                    // If Axervable is still contained in array, then notify observers, else remove this listener
+                public void observableChanged(Axervable<T> obs, T oldValue, 
+                        T newValue) {
+                    // If Axervable is still contained in array, then notify
+                    // observers, else remove this listener
                     if (Arrays.stream(values).anyMatch(v -> v == obs)) {
                         Vex.super._setValueAndNotify(values.clone());
                     } else {
@@ -54,17 +58,18 @@ public class Vex<T> extends Rax<T[]> {
      * @param newArray
      */
     @Override
-    public void setValue(T[] newArray) {
-        // A new array is required as Axervable only notifies observers if internal value reference has changed
+    public void set(T[] newArray) {
+        // A new array is required as Axervable only notifies observers if
+        // internal value reference has changed
         T[] clonedArray = newArray.clone();
 
         // If relevant, remove change listener from old array and add to new array
         if (this.holdsAxervables) {
-            this._removeListenersFromValues(super.getValue());
+            this._removeListenersFromValues(super.get());
             this._addListenersToAxervables(clonedArray);
         }
 
-        super.setValue(clonedArray);
+        super.set(clonedArray);
     }
 
     /**
@@ -82,7 +87,7 @@ public class Vex<T> extends Rax<T[]> {
      * @return length of array held by this Vex
      */
     public int length() {
-        return super.getValue().length;
+        return super.get().length;
     }
 
     /**
@@ -92,11 +97,12 @@ public class Vex<T> extends Rax<T[]> {
      * @return read-only value at index
      */
     public T getAt(int i) {
-        return this.getValue()[i];
+        return this.get()[i];
     }
 
     /**
-     * 'a[i] = b' operator overloading for Groovy. Sets new value specified at position and notifies all observers.
+     * 'a[i] = b' operator overloading for Groovy. Sets new value specified at
+     * position and notifies all observers.
      * @param i
      * @param newValue
      */
@@ -107,10 +113,11 @@ public class Vex<T> extends Rax<T[]> {
             ((Axervable)newValue).addListener(axervableListener);
         }
 
-        // A new array is required as Axervable only notifies observers if internal value reference has changed
-        T[] newArray = super.getValue().clone();
+        // A new array is required as Axervable only notifies observers if 
+        // internal value reference has changed
+        T[] newArray = super.get().clone();
         newArray[i] = newValue;
-        super.setValue(newArray);
+        super.set(newArray);
     }
 
     private void _addListenersToAxervables(T[] values) {
@@ -120,7 +127,7 @@ public class Vex<T> extends Rax<T[]> {
     }
 
     private void _removeListenersFromValues(T[] values) {
-        for (T value : super.getValue()) {
+        for (T value : super.get()) {
             ((Axervable)value).removeListener(axervableListener);
         }
     }

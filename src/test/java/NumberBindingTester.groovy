@@ -13,12 +13,12 @@ class NumberBindingTester extends GroovyTestCase {
         Rax b = new Nax(2);
         Binding binding = new NumberBinding(a, b, BindingType.ADD);
 
-        assert binding.getValue().class == Integer.class
-        assert binding.getValue() == 7
+        assert binding.get().class == Integer.class
+        assert binding.get() == 7
 
-        a.setValue(10);
+        a.set(10);
 
-        assert binding.getValue() == 12
+        assert binding.get() == 12
 
         Rax c = new Nax(binding);
 
@@ -30,7 +30,7 @@ class NumberBindingTester extends GroovyTestCase {
         Rax b = new Nax(3);
         Binding binding = new NumberBinding(a, b, BindingType.ADD);
 
-        assert binding.getValue() == 4.25
+        assert binding.get() == 4.25
     }
 
     void testNumberBindingOperatorOverloading() {
@@ -43,12 +43,12 @@ class NumberBindingTester extends GroovyTestCase {
         Binding mod = a % b;
         Binding pow = a ** b;
 
-        assert plus.getValue() == 17
-        assert sub.getValue() == 7
-        assert mult.getValue() == 60
-        assert div.getValue() == 2.4
-        assert mod.getValue() == 2
-        assert pow.getValue() == 248832
+        assert plus.get() == 17
+        assert sub.get() == 7
+        assert mult.get() == 60
+        assert div.get() == 2.4
+        assert mod.get() == 2
+        assert pow.get() == 248832
     }
 
     void testNumberBindingThreeRax() {

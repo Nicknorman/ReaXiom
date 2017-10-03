@@ -31,8 +31,9 @@ public abstract class Binding<T> extends Axervable<T> {
         // Subscribe to both observables
         _obs1.addObserver(this);
         // Only subscribe to _obs2 if both observables are different
-        if (_obs1 != _obs2)
+        if (_obs1 != _obs2) {
             _obs2.addObserver(this);
+        }
     }
 
     /**
@@ -114,6 +115,6 @@ public abstract class Binding<T> extends Axervable<T> {
      * @return
      */
     public T call() {
-        return this.getValue();
+        return this.get();
     }
 }

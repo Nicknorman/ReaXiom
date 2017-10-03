@@ -19,13 +19,13 @@ class BooleanBindingTester extends GroovyTestCase {
         assert !or()
         assert !xor()
 
-        a.setValue(true)
+        a.set(true)
 
         assert !and()
         assert or()
         assert xor()
 
-        b.setValue(true)
+        b.set(true)
 
         assert and()
         assert or()
@@ -48,7 +48,7 @@ class BooleanBindingTester extends GroovyTestCase {
         assert !andOr()
         assert !xorAnd()
 
-        a.setValue(true)
+        a.set(true)
 
         assert !and()
         assert or()
@@ -56,7 +56,7 @@ class BooleanBindingTester extends GroovyTestCase {
         assert !andOr()
         assert !xorAnd()
 
-        b.setValue(true)
+        b.set(true)
 
         assert !and()
         assert or()
@@ -64,7 +64,7 @@ class BooleanBindingTester extends GroovyTestCase {
         assert andOr()
         assert !xorAnd()
 
-        c.setValue(true)
+        c.set(true)
 
         assert and()
         assert or()
@@ -91,7 +91,7 @@ class BooleanBindingTester extends GroovyTestCase {
         assert greaterOrEqual()
         assert lessOrEqual()
 
-        a.setValue(11)
+        a.set(11)
 
         assert !equal()
         assert notEqual()
@@ -100,7 +100,7 @@ class BooleanBindingTester extends GroovyTestCase {
         assert greaterOrEqual()
         assert !lessOrEqual()
 
-        b.setValue(12)
+        b.set(12)
 
         assert !equal()
         assert notEqual()
@@ -128,7 +128,7 @@ class BooleanBindingTester extends GroovyTestCase {
         assert !equal()
         assert notEqual()
 
-        a.setValue(-3)
+        a.set(-3)
 
         assert !greater()
         assert !equalOrGreater()
@@ -137,7 +137,7 @@ class BooleanBindingTester extends GroovyTestCase {
         assert !equal()
         assert notEqual()
 
-        b.setValue(-3.0f)
+        b.set(-3.0f)
 
         assert !greater()
         assert equalOrGreater()
@@ -166,7 +166,7 @@ class BooleanBindingTester extends GroovyTestCase {
         assert !equal()
         assert notEqual()
 
-        c.setValue(20)
+        c.set(20)
 
         assert !greater()
         assert !equalOrGreater()
@@ -175,7 +175,7 @@ class BooleanBindingTester extends GroovyTestCase {
         assert !equal()
         assert notEqual()
 
-        b.setValue(17)
+        b.set(17)
 
         assert !greater()
         assert !equalOrGreater()
@@ -184,7 +184,7 @@ class BooleanBindingTester extends GroovyTestCase {
         assert !equal()
         assert notEqual()
 
-        b.setValue(15)
+        b.set(15)
 
         assert !greater()
         assert !equalOrGreater()
@@ -193,7 +193,7 @@ class BooleanBindingTester extends GroovyTestCase {
         assert !equal()
         assert !notEqual()
 
-        c.setValue(15)
+        c.set(15)
 
         assert !greater()
         assert equalOrGreater()
@@ -221,7 +221,7 @@ class BooleanBindingTester extends GroovyTestCase {
         assert !equal()
         assert notEqual()
 
-        a.setValue(5)
+        a.set(5)
 
         assert !greater()
         assert !equalOrGreater()
@@ -230,7 +230,7 @@ class BooleanBindingTester extends GroovyTestCase {
         assert !equal()
         assert notEqual()
 
-        a.setValue(10)
+        a.set(10)
 
         assert !greater()
         assert equalOrGreater()
@@ -241,7 +241,7 @@ class BooleanBindingTester extends GroovyTestCase {
     }
 
     void testNumberComparisonSameNumber() {
-        Nax a = new Nax(5);
+        Nax<Integer> a = new Nax(5);
 
         BooleanBinding greater = a.greaterThan(a)
         BooleanBinding equalOrGreater = a.equalOrGreaterThan(a)
@@ -257,7 +257,7 @@ class BooleanBindingTester extends GroovyTestCase {
         assert equal()
         assert !notEqual()
 
-        a.setValue(7)
+        a.set(7)
 
         assert !greater()
         assert equalOrGreater()
@@ -275,7 +275,7 @@ class BooleanBindingTester extends GroovyTestCase {
         assert !b()
         assert !c()
 
-        a.setValue(false)
+        a.set(false)
 
         assert b()
         assert !c()

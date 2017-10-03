@@ -25,30 +25,33 @@ public abstract class Rax<T> extends Axervable<T> {
 
     /**
      * Should only be called by the Observable that this Rax is subscribed to.
-     * Updates this Rax's value and notifies all of its observers if {o} corresponds to its _subscribedTo Observable,
+     * Updates this Rax's value and notifies all of its observers if {o} 
+     * corresponds to its _subscribedTo Observable,
      * and {arg}'s type is the same type as this Rax's internal _value's type.
      * @param o
      * @param arg
      */
     public void update(Observable o, Object arg) {
-        T value = super.getValue();
+        T value = super.get();
 
         if (o == _subscribedTo) {
             if (value == null || value.getClass().isInstance(arg)) {
                 this._setValueAndNotify((T)arg);
             } else {
-                throw new RuntimeException("Subscribed value type " + arg.getClass().toString() +
-                        " differs from " + value.getClass().toString());
+                throw new RuntimeException("Subscribed value type " + 
+                        arg.getClass().toString() + " differs from " 
+                        + value.getClass().toString());
             }
         }
     }
 
     /**
-     * Sets the internal value of this Rax and updates its observers, as long as this Rax is not subscribed to any
+     * Sets the internal value of this Rax and updates its observers, as long as
+     * this Rax is not subscribed to any
      * Observable.
      * @param newValue
      */
-    public void setValue(T newValue) {
+    public void set(T newValue) {
         if (_subscribedTo != null) {
             throw new RuntimeException("Bound object cannot be set");
         }
@@ -78,7 +81,8 @@ public abstract class Rax<T> extends Axervable<T> {
     }
 
     /**
-     * Clears this Rax's subscription. Preservers the last value gained from its former Observable.
+     * Clears this Rax's subscription. Preservers the last value gained from its
+     * former Observable.
      */
     public void clearSubscription() {
         if (_subscribedTo != null) {

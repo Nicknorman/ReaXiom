@@ -9,7 +9,8 @@ public class BooleanBinding extends Binding<Boolean> {
     /**
      * @param obs1
      * @param obs2
-     * @param bindingType The type of Binding that should describe the relationship between the two Observables' values.
+     * @param bindingType The type of Binding that should describe the 
+     * relationship between the two Observables' values.
      */
     public BooleanBinding(Observable obs1, Observable obs2, BindingType bindingType) {
         super(obs1, obs2, bindingType);

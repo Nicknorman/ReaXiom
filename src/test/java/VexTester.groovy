@@ -41,21 +41,21 @@ class VexTester extends GroovyTestCase {
         assert b[1]() == 3
         assert b[2]() == 5
 
-        a[0].setValue(2)
+        a[0].set(2)
 
         assert b[0]() == 2
         assert b[1]() == 3
         assert b[2]() == 5
 
-        a[1].setValue(6)
-        a[2].setValue(10)
+        a[1].set(6)
+        a[2].set(10)
 
         assert b[0]() == 2
         assert b[1]() == 6
         assert b[2]() == 10
 
         Nax[] axArr2 = [new Nax(21)]
-        a.setValue(axArr2)
+        a.set(axArr2)
 
         assert b[0]() == 21
     }
@@ -69,7 +69,7 @@ class VexTester extends GroovyTestCase {
 
         Nax[] axArr2 = [new Nax(21)]
         Nax n2 = axArr2[0]
-        a.setValue(axArr2)
+        a.set(axArr2)
 
         assert n1.getChangeListeners().size() == 0
         assert n2.getChangeListeners().size() == 1

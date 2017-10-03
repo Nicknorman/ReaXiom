@@ -7,6 +7,7 @@ import java.util.Observer;
 
 /**
  * Created by Nick on 17-05-2017.
+ * An Axervable is a read-only observable.
  */
 public abstract class Axervable<T> extends Observable implements Observer {
     private T _value;
@@ -19,8 +20,8 @@ public abstract class Axervable<T> extends Observable implements Observer {
 
     /**
      * Should be called by Observable that this Observer is subscribed to.
-     * Subclasses should make sure that the implementation of this method results in a call to _setValueAndNotify()
-     * if the right conditions are met.
+     * Subclasses should make sure that the implementation of this method 
+     * results in a call to _setValueAndNotify() if the right conditions are met.
      * @param observable
      * @param o
      */
@@ -51,15 +52,16 @@ public abstract class Axervable<T> extends Observable implements Observer {
     /**
      * @return value held by this Axervable.
      */
-    public T getValue() {
+    public T get() {
         if (_value != null)
             return _cloneValue(_value);
         return null;
     }
 
     /**
-     * Sets this Axervable's value only if the new value is different to the old value. Notifies all of its observers
-     * and invokes all ChangeListeners registered. Checking that new value is different makes sure to end cyclic
+     * Sets this Axervable's value only if the new value is different to the 
+     * old value. Notifies all of its observers and invokes all ChangeListeners
+     * registered. Checking that new value is different makes sure to end cyclic
      * updating when Axervables are bound bidirectional
      * @param newValue
      */
@@ -84,7 +86,7 @@ public abstract class Axervable<T> extends Observable implements Observer {
 
     /**
      * Used for notifying Observers with a read-only value.
-     * Subclasses should override this if the internal value is clonable.
+     * Subclasses should override this if the internal value is cloneable.
      * @param value
      * @return
      */
@@ -105,11 +107,11 @@ public abstract class Axervable<T> extends Observable implements Observer {
      * @return
      */
     public T call() {
-        return this.getValue();
+        return this.get();
     }
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName() + " (" + this.getValue().toString() + ")";
+        return this.getClass().getSimpleName() + " (" + this.get().toString() + ")";
     }
 }

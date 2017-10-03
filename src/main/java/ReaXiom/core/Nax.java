@@ -5,13 +5,15 @@ import java.util.Observable;
 /**
  * Created by Nick on 26-05-2017.
  * Holds a number.
+ * @param <T>
  */
-public class Nax extends Rax<Number> {
-    public Nax(Number value) {
+public class Nax<T extends Number> extends Rax<T> {
+    
+    public Nax(T value) {
         super(value);
     }
 
-    public Nax(Axervable<Number> obs) {
+    public Nax(Axervable<T> obs) {
         super(obs);
     }
 

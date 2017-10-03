@@ -4,8 +4,9 @@ import java.util.Observable;
 
 /**
  * Created by Nick on 16-05-2017.
+ * @param <T>
  */
-public class NumberBinding extends Binding<Number> {
+public class NumberBinding<T extends Number> extends Binding<Number> {
     /**
      * The specific Number subclass that will be returned by this NumberBinding.
      */
@@ -14,7 +15,8 @@ public class NumberBinding extends Binding<Number> {
     /**
      * @param obs1
      * @param obs2
-     * @param type The type of Binding that should describe the relationship between the two Observables' values.
+     * @param type The type of Binding that should describe the relationship 
+     * between the two Observables' values.
      */
     public NumberBinding(Observable obs1, Observable obs2, BindingType type) {
         super(obs1, obs2, type);
@@ -26,7 +28,8 @@ public class NumberBinding extends Binding<Number> {
         this._valueType = null;
     }
 
-    public NumberBinding(Observable obs1, Observable obs2, BindingType type, Class<? extends Number> valueType) {
+    public NumberBinding(Observable obs1, Observable obs2, BindingType type, 
+            Class<? extends Number> valueType) {
         super(obs1, obs2, type);
         this._valueType = valueType;
     }
@@ -59,12 +62,14 @@ public class NumberBinding extends Binding<Number> {
             return modNumbers(nArg1, nArg2, _valueType);
         if (_bindingType == BindingType.POWER)
             return powNumbers(nArg1, nArg2, _valueType);
-        throw new RuntimeException("Number binding type is not an usable value: " + _bindingType.toString());
+        throw new RuntimeException("Number binding type is not an usable value: "
+                + _bindingType.toString());
     }
 
     /**
      * Sets this NumberBindings's _valueType based on arguments.
-     * This is important as NumberBinding calculation methods require a specified return type.
+     * This is important as NumberBinding calculation methods require a 
+     * specified return type.
      * If BindingType is DIVIDE, the value type will always be set to Double.
      * @param arg1
      * @param arg2
@@ -82,7 +87,8 @@ public class NumberBinding extends Binding<Number> {
             _valueType = Integer.class;
     }
 
-    private static Number addNumbers(Number a, Number b, Class<? extends Number> returnType) {
+    private static Number addNumbers(Number a, Number b, 
+            Class<? extends Number> returnType) {
         if (returnType == Double.class)
             return a.doubleValue() + b.doubleValue();
         if (returnType == Float.class)
@@ -91,10 +97,12 @@ public class NumberBinding extends Binding<Number> {
             return a.longValue() + b.longValue();
         if (returnType == Integer.class)
             return a.intValue() + b.intValue();
-        throw new RuntimeException("Return type not specified as one of the allowed values: " + returnType);
+        throw new RuntimeException("Return type not specified as one of the " 
+                + "allowed values: " + returnType);
     }
 
-    private static Number subtractNumbers(Number a, Number b, Class<? extends Number> returnType) {
+    private static Number subtractNumbers(Number a, Number b, 
+            Class<? extends Number> returnType) {
         if (returnType == Double.class)
             return a.doubleValue() - b.doubleValue();
         if (returnType == Float.class)
@@ -103,10 +111,12 @@ public class NumberBinding extends Binding<Number> {
             return a.longValue() - b.longValue();
         if (returnType == Integer.class)
             return a.intValue() - b.intValue();
-        throw new RuntimeException("Return type not specified as one of the allowed values: " + returnType);
+        throw new RuntimeException("Return type not specified as one of the " 
+                + "allowed values: " + returnType);
     }
 
-    private static Number multiplyNumbers(Number a, Number b, Class<? extends Number> returnType) {
+    private static Number multiplyNumbers(Number a, Number b,
+            Class<? extends Number> returnType) {
         if (returnType == Double.class)
             return a.doubleValue() * b.doubleValue();
         if (returnType == Float.class)
@@ -115,10 +125,12 @@ public class NumberBinding extends Binding<Number> {
             return a.longValue() * b.longValue();
         if (returnType == Integer.class)
             return a.intValue() * b.intValue();
-        throw new RuntimeException("Return type not specified as one of the allowed values: " + returnType);
+        throw new RuntimeException("Return type not specified as one of the " 
+                + "allowed values: " + returnType);
     }
 
-    private static Number divideNumbers(Number a, Number b, Class<? extends Number> returnType) {
+    private static Number divideNumbers(Number a, Number b, 
+            Class<? extends Number> returnType) {
         if (returnType == Double.class)
             return a.doubleValue() / b.doubleValue();
         if (returnType == Float.class)
@@ -127,10 +139,12 @@ public class NumberBinding extends Binding<Number> {
             return a.longValue() / b.longValue();
         if (returnType == Integer.class)
             return a.intValue() / b.intValue();
-        throw new RuntimeException("Return type not specified as one of the allowed values: " + returnType);
+        throw new RuntimeException("Return type not specified as one of the " + 
+                "allowed values: " + returnType);
     }
 
-    private static Number modNumbers(Number a, Number b, Class<? extends Number> returnType) {
+    private static Number modNumbers(Number a, Number b, 
+            Class<? extends Number> returnType) {
         if (returnType == Double.class)
             return a.doubleValue() % b.doubleValue();
         if (returnType == Float.class)
@@ -139,10 +153,12 @@ public class NumberBinding extends Binding<Number> {
             return a.longValue() % b.longValue();
         if (returnType == Integer.class)
             return a.intValue() % b.intValue();
-        throw new RuntimeException("Return type not specified as one of the allowed values: " + returnType);
+        throw new RuntimeException("Return type not specified as one of the "
+                + "allowed values: " + returnType);
     }
 
-    private static Number powNumbers(Number a, Number b, Class<? extends Number> returnType) {
+    private static Number powNumbers(Number a, Number b, 
+            Class<? extends Number> returnType) {
         if (returnType == Double.class)
             return Math.pow(a.doubleValue(), b.doubleValue());
         if (returnType == Float.class)
@@ -151,7 +167,8 @@ public class NumberBinding extends Binding<Number> {
             return (long)Math.pow(a.doubleValue(), b.doubleValue());
         if (returnType == Integer.class)
             return (int)Math.pow(a.doubleValue(), b.doubleValue());
-        throw new RuntimeException("Return type not specified as one of the allowed values: " + returnType);
+        throw new RuntimeException("Return type not specified as one of the "
+                + "allowed values: " + returnType);
     }
 
     /**
@@ -237,52 +254,77 @@ public class NumberBinding extends Binding<Number> {
      * @param observable
      * @return
      */
-    public BooleanBinding equalTo(Observable observable) {return new BooleanBinding(this, observable, BindingType.EQUAL_TO); }
+    public BooleanBinding equalTo(Observable observable) {
+        return new BooleanBinding(this, observable, BindingType.EQUAL_TO); 
+    }
 
-    public BooleanBinding equalTo(Number value) {return new BooleanBinding(this, value, BindingType.EQUAL_TO); }
-
-    /**
-     *
-     * @param observable
-     * @return
-     */
-    public BooleanBinding notEqualTo(Observable observable) {return new BooleanBinding(this, observable, BindingType.NOT_EQUAL_TO); }
-
-    public BooleanBinding notEqualTo(Number value) {return new BooleanBinding(this, value, BindingType.NOT_EQUAL_TO); }
+    public BooleanBinding equalTo(Number value) {
+        return new BooleanBinding(this, value, BindingType.EQUAL_TO); 
+    }
 
     /**
      *
      * @param observable
      * @return
      */
-    public BooleanBinding equalOrGreaterThan(Observable observable) {return new BooleanBinding(this, observable, BindingType.EQUAL_OR_GREATER_THAN); }
+    public BooleanBinding notEqualTo(Observable observable) {
+        return new BooleanBinding(this, observable, BindingType.NOT_EQUAL_TO); 
+    }
 
-    public BooleanBinding equalOrGreaterThan(Number value) {return new BooleanBinding(this, value, BindingType.EQUAL_OR_GREATER_THAN); }
-
-    /**
-     *
-     * @param observable
-     * @return
-     */
-    public BooleanBinding equalOrLessThan(Observable observable) {return new BooleanBinding(this, observable, BindingType.EQUAL_OR_LESS_THAN); }
-
-    public BooleanBinding equalOrLessThan(Number value) {return new BooleanBinding(this, value, BindingType.EQUAL_OR_LESS_THAN); }
+    public BooleanBinding notEqualTo(Number value) {
+        return new BooleanBinding(this, value, BindingType.NOT_EQUAL_TO); 
+    }
 
     /**
      *
      * @param observable
      * @return
      */
-    public BooleanBinding lessThan(Observable observable) {return new BooleanBinding(this, observable, BindingType.LESS_THAN); }
+    public BooleanBinding equalOrGreaterThan(Observable observable) {
+        return new BooleanBinding(this, observable, 
+                BindingType.EQUAL_OR_GREATER_THAN); 
+    }
 
-    public BooleanBinding lessThan(Number value) {return new BooleanBinding(this, value, BindingType.LESS_THAN); }
+    public BooleanBinding equalOrGreaterThan(Number value) {
+        return new BooleanBinding(this, value, BindingType.EQUAL_OR_GREATER_THAN); 
+    }
 
     /**
      *
      * @param observable
      * @return
      */
-    public BooleanBinding greaterThan(Observable observable) {return new BooleanBinding(this, observable, BindingType.GREATER_THAN); }
+    public BooleanBinding equalOrLessThan(Observable observable) {
+        return new BooleanBinding(this, observable, BindingType.EQUAL_OR_LESS_THAN); 
+    }
 
-    public BooleanBinding greaterThan(Number value) {return new BooleanBinding(this, value, BindingType.GREATER_THAN); }
+    public BooleanBinding equalOrLessThan(Number value) {
+        return new BooleanBinding(this, value, BindingType.EQUAL_OR_LESS_THAN);
+    }
+
+    /**
+     *
+     * @param observable
+     * @return
+     */
+    public BooleanBinding lessThan(Observable observable) {
+        return new BooleanBinding(this, observable, BindingType.LESS_THAN); 
+    }
+
+    public BooleanBinding lessThan(Number value) {
+        return new BooleanBinding(this, value, BindingType.LESS_THAN); 
+    }
+
+    /**
+     *
+     * @param observable
+     * @return
+     */
+    public BooleanBinding greaterThan(Observable observable) {
+        return new BooleanBinding(this, observable, BindingType.GREATER_THAN); 
+    }
+
+    public BooleanBinding greaterThan(Number value) {
+        return new BooleanBinding(this, value, BindingType.GREATER_THAN); 
+    }
 }

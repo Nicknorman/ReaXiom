@@ -1,6 +1,5 @@
 package ReaXiom.core;
 
-import java.util.Observable;
 
 /**
  * Created by Nick on 27-05-2017.
